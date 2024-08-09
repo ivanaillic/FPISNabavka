@@ -1,20 +1,34 @@
 package com.projekat.fpis_backend.model;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
+@Table(name = "materijal")
 public class Materijal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "sifra_materijala")
     private Long sifraMaterijala;
+
     @Column(name = "naziv_materijala")
     private String nazivMaterijala;
+
     @Column(name = "cena")
     private double cena;
 
     @Column(name = "jedinica_mere")
     private String jedinicaMere;
+
+  //  @OneToMany(mappedBy = "materijal", cascade = CascadeType.ALL)
+  //  private List<StavkaNarudzbenice> stavkeNarudzbenice;
+
+    @OneToMany(mappedBy = "materijal", cascade = CascadeType.ALL)
+    @JsonBackReference
+    private List<StavkaNarudzbenice> stavkeNarudzbenice;
+
 
     public Materijal() {}
 
@@ -57,5 +71,11 @@ public class Materijal {
         this.jedinicaMere = jedinicaMere;
     }
 
+    public List<StavkaNarudzbenice> getStavkeNarudzbenice() {
+        return stavkeNarudzbenice;
+    }
 
+    public void setStavkeNarudzbenice(List<StavkaNarudzbenice> stavkeNarudzbenice) {
+        this.stavkeNarudzbenice = stavkeNarudzbenice;
+    }
 }

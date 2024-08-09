@@ -1,8 +1,10 @@
 package com.projekat.fpis_backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import java.util.List;
 
 @Entity
 @Table(name = "dobavljac")
@@ -27,9 +29,16 @@ public class Dobavljac {
     @Column(name = "tekuci_racun")
     private String tekuciRacun;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "ptt", referencedColumnName = "ptt")
     private Grad grad;
+
+  //  @OneToMany(mappedBy = "dobavljac", cascade = CascadeType.ALL)
+   // private List<Narudzbenica> narudzbenice;
+
+    @OneToMany(mappedBy = "dobavljac", cascade = CascadeType.ALL)
+    @JsonBackReference
+    private List<Narudzbenica> narudzbenice;
 
     public Long getPibDobavljaca() {
         return pibDobavljaca;
@@ -77,5 +86,13 @@ public class Dobavljac {
 
     public void setGrad(Grad grad) {
         this.grad = grad;
+    }
+
+    public List<Narudzbenica> getNarudzbenice() {
+        return narudzbenice;
+    }
+
+    public void setNarudzbenice(List<Narudzbenica> narudzbenice) {
+        this.narudzbenice = narudzbenice;
     }
 }

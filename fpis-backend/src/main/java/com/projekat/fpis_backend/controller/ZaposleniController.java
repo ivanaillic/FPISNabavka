@@ -20,10 +20,9 @@ public class ZaposleniController {
         return zaposleniRepository.findAll();
     }
 
-    @GetMapping("/zaposleni/{sifra}")
-    public Zaposleni getZaposleniById(@PathVariable Long sifra) {
-        return zaposleniRepository.findById(sifra)
-                .orElseThrow(() -> new ResourceNotFoundException("Zaposleni with ID " + sifra + " not found"));
+    @GetMapping("/zaposleni/{jmbg}")
+    public Zaposleni getZaposleniById(@PathVariable String jmbg) {
+        return zaposleniRepository.findById(jmbg)
+                .orElseThrow(() -> new ResourceNotFoundException("Zaposleni with JMBG " + jmbg + " not found"));
     }
-
 }

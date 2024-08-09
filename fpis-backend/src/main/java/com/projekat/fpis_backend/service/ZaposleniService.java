@@ -7,8 +7,6 @@ import java.util.Optional;
 
 public interface ZaposleniService {
 
-    Optional<Zaposleni> findById(Long sifraZaposlenog);
+    Optional<Zaposleni> findById(String jmbg);
     List<Zaposleni> findAll();
-
 }
-
