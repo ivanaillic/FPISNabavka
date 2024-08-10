@@ -2,9 +2,12 @@ import React from 'react';
 
 const Home = () => {
     return (
-        <div className="container">
-            <h1>Welcome to MyApp</h1>
-            <p>This is the home page of your application. Use the navigation bar to explore different sections.</p>
+        <div className="container mt-4">
+            <h1 className="mb-4 text-center">Dobrodošli u Vinariju "In vino veritas"</h1>
+            <p className="text-center">
+                Proces nabavke u našoj vinariji ključan je za održavanje kvaliteta naših vina.<br />
+                Ova aplikacija omogućava efikasno upravljanje nabavkama i saradnju sa dobavljačima.
+            </p>
         </div>
     );
 };

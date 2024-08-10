@@ -17,6 +17,12 @@ const Navbar = () => {
                     <li className="nav-item">
                         <Link className="btn btn-outline-primary me-2" to="/dobavljac">Dodaj Dobavljaca</Link>
                     </li>
+                    <li className="nav-item">
+                        <Link className="btn btn-outline-primary me-2" to="/narudzbenice">Dodaj Narudzbenicu</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className="btn btn-outline-primary me-2" to="/prikazi-narudzbenice">Prikazi Narudzbenice</Link> {/* Dodaj ovu stavku */}
+                    </li>
                 </ul>
             </div>
         </nav>

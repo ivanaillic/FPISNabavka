@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // Koristimo useNavigate umesto useHistory
+import { useNavigate } from 'react-router-dom';
 import ApiService from '../services/ApiService';
 
 const PrikaziDobavljace = () => {
     const [dobavljaci, setDobavljaci] = useState([]);
     const [pretraga, setPretraga] = useState('');
     const [selektovaniDobavljac, setSelektovaniDobavljac] = useState(null);
-    const navigate = useNavigate(); // Inicijalizacija useNavigate za navigaciju
+    const navigate = useNavigate();
 
     useEffect(() => {
         ApiService.getDobavljaci()

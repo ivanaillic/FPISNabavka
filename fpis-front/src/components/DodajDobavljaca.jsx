@@ -12,7 +12,6 @@ const DodajDobavljaca = () => {
 
     const [gradovi, setGradovi] = useState([]);
 
-    // Učitaj gradove sa backend-a
     useEffect(() => {
         ApiService.getGradovi()
             .then(response => setGradovi(response.data))
@@ -40,7 +39,6 @@ const DodajDobavljaca = () => {
         ApiService.createDobavljac(dobavljac)
             .then(response => {
                 console.log('Dobavljac successfully created:', response.data);
-                // Očistite formu ili preusmerite korisnika
             })
             .catch(error => {
                 console.error('There was an error creating the supplier:', error);

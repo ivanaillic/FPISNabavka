@@ -19,20 +19,18 @@ const IzmeniDobavljaca = () => {
     const [gradovi, setGradovi] = useState([]);
 
     useEffect(() => {
-        // Učitajte podatke o dobavljaču
         ApiService.getDobavljacById(pib)
             .then(response => {
-                console.log('Dobavljac Data:', response.data); // Proverite šta se dobija kao odgovor
+                console.log('Dobavljac Data:', response.data);
                 setDobavljac(response.data);
             })
             .catch(error => {
                 console.error('There was an error fetching the supplier!', error);
             });
 
-        // Učitajte gradove za combo box
         ApiService.getGradovi()
             .then(response => {
-                console.log('Gradovi Data:', response.data); // Proverite šta se dobija kao odgovor
+                console.log('Gradovi Data:', response.data);
                 setGradovi(response.data);
             })
             .catch(error => {
@@ -44,7 +42,7 @@ const IzmeniDobavljaca = () => {
         const { name, value } = e.target;
 
         if (name === 'grad') {
-            const selectedGrad = gradovi.find(grad => grad.ptt === Number(value)); // Konverzija u broj (Long tip)
+            const selectedGrad = gradovi.find(grad => grad.ptt === Number(value));
             console.log('Selected Grad:', selectedGrad);
             setDobavljac(prevState => ({
                 ...prevState,
@@ -61,8 +59,7 @@ const IzmeniDobavljaca = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Ažuriranje dobavljača sa izabranim gradom
-        console.log('Dobavljac before update:', dobavljac); // Proverite stanje pre ažuriranja
+        console.log('Dobavljac before update:', dobavljac);
         ApiService.updateDobavljac(pib, dobavljac)
             .then(() => {
                 navigate('/dobavljaci');
