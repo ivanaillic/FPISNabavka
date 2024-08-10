@@ -1,5 +1,4 @@
 package com.projekat.fpis_backend.model;
-
 import jakarta.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;

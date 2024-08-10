@@ -1,7 +1,8 @@
 package com.projekat.fpis_backend.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,12 +11,6 @@ public class StavkaNarudzbenice {
 
     @EmbeddedId
     private StavkaNarudzbeniceCompositeKey id;
-
-    //@ManyToOne(fetch = FetchType.LAZY)
-   // @MapsId("brojNarudzbenice")
-    //@JoinColumn(name = "broj_narudzbenice", insertable = false, updatable = false)
-   // @JsonIgnoreProperties("stavkeNarudzbenice")
-   // private Narudzbenica narudzbenica;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("brojNarudzbenice")
@@ -32,6 +27,25 @@ public class StavkaNarudzbenice {
     @ManyToOne()
     @JoinColumn(name = "sifra_materijala", referencedColumnName = "sifra_materijala")
     private Materijal materijal;
+
+    public StavkaNarudzbenice() {
+        this.id = new StavkaNarudzbeniceCompositeKey();
+    }
+
+    @JsonCreator
+    public StavkaNarudzbenice(
+            @JsonProperty("id") StavkaNarudzbeniceCompositeKey id,
+            @JsonProperty("kolicina") Double kolicina,
+            @JsonProperty("opis") String opis,
+            @JsonProperty("materijal") Materijal materijal
+    ) {
+        this.id = id;
+        this.kolicina = kolicina;
+        this.opis = opis;
+        this.materijal = materijal;
+    }
+
+    // Getteri i setteri
 
     public StavkaNarudzbeniceCompositeKey getId() {
         return id;

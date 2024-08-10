@@ -10,6 +10,7 @@ import java.util.List;
 @Table(name = "dobavljac")
 public class Dobavljac {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pib_dobavljaca")
@@ -39,6 +40,13 @@ public class Dobavljac {
     @OneToMany(mappedBy = "dobavljac", cascade = CascadeType.ALL)
     @JsonBackReference
     private List<Narudzbenica> narudzbenice;
+
+    public Dobavljac(Long pibDobavljaca) {
+        this.pibDobavljaca = pibDobavljaca;
+    }
+
+    public Dobavljac() {
+    }
 
     public Long getPibDobavljaca() {
         return pibDobavljaca;

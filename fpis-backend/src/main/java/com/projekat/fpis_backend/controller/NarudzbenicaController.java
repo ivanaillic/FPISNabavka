@@ -2,6 +2,8 @@ package com.projekat.fpis_backend.controller;
 
 import com.projekat.fpis_backend.model.Narudzbenica;
 import com.projekat.fpis_backend.service.NarudzbenicaService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,8 +14,10 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/narudzbenice")
+@CrossOrigin("http://localhost:5174")
 public class NarudzbenicaController {
 
+    private static final Logger logger = LoggerFactory.getLogger(NarudzbenicaController.class);
     @Autowired
     private NarudzbenicaService narudzbenicaService;
 
@@ -31,8 +35,15 @@ public class NarudzbenicaController {
 
     @PostMapping
     public ResponseEntity<Narudzbenica> createNarudzbenica(@RequestBody Narudzbenica narudzbenica) {
-        Narudzbenica createdNarudzbenica = narudzbenicaService.createNarudzbenica(narudzbenica);
-        return new ResponseEntity<>(createdNarudzbenica, HttpStatus.CREATED);
+        logger.info("Primljen zahtev za kreiranje narudžbenice: {}", narudzbenica);
+        try {
+            Narudzbenica createdNarudzbenica = narudzbenicaService.createNarudzbenica(narudzbenica);
+            logger.info("Narudžbenica uspešno kreirana: {}", createdNarudzbenica);
+            return new ResponseEntity<>(createdNarudzbenica, HttpStatus.CREATED);
+        } catch (Exception e) {
+            logger.error("Greška prilikom kreiranja narudžbenice", e);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PutMapping("/{id}")
