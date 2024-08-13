@@ -22,9 +22,6 @@ public class Materijal {
     @Column(name = "jedinica_mere")
     private String jedinicaMere;
 
-  //  @OneToMany(mappedBy = "materijal", cascade = CascadeType.ALL)
-  //  private List<StavkaNarudzbenice> stavkeNarudzbenice;
-
     @OneToMany(mappedBy = "materijal", cascade = CascadeType.ALL)
     @JsonBackReference
     private List<StavkaNarudzbenice> stavkeNarudzbenice;

@@ -16,15 +16,15 @@ public class GradController {
     private GradRepository gradRepository;
 
 
-    @GetMapping("/gradovi")
+    @GetMapping("/api/gradovi")
     public List<Grad> getAllGradovi() {
         return gradRepository.findAll();
     }
 
-    @GetMapping("/grad/{ptt}")
+    @GetMapping("/api/grad/{ptt}")
     public Grad getGradById(@PathVariable Long ptt) {
         return gradRepository.findById(ptt)
-                .orElseThrow(() -> new ResourceNotFoundException("Grad with PTT " + ptt + " not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Grad sa PTT " + ptt + " nije nadjen"));
     }
 
 

@@ -15,7 +15,7 @@ public class Grad {
     @NotNull
     @Column(name = "ptt")
     private Long ptt;
-    @Size(max = 255)
+    @Size(max = 50)
     @Column(name = "naziv_grada")
     private String nazivGrada;
 

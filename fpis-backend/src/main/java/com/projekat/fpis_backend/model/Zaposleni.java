@@ -19,8 +19,6 @@ public class Zaposleni {
     @Column(name = "ime_prezime")
     private String imePrezime;
 
-   // @OneToMany(mappedBy = "zaposleni", cascade = CascadeType.ALL)
-   // private List<Narudzbenica> narudzbenice;
 
     @OneToMany(mappedBy = "zaposleni", cascade = CascadeType.ALL)
     @JsonBackReference

@@ -16,15 +16,15 @@ public class MaterijalController {
     private MaterijalRepository materijalRepository;
 
 
-    @GetMapping("/materijali")
+    @GetMapping("/api/materijali")
     public List<Materijal> getAllMaterijali() {
         return materijalRepository.findAll();
     }
 
-    @GetMapping("/materijal/{sifra}")
+    @GetMapping("/api/materijal/{sifra}")
     public Materijal getMaterijalById(@PathVariable Long sifra) {
         return materijalRepository.findById(sifra)
-                .orElseThrow(() -> new ResourceNotFoundException("Materijal with ID " + sifra + " not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Materijal sa ID " + sifra + " nije nadjen"));
     }
 
 }

@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 import java.util.List;
 
 @Entity
@@ -12,10 +14,11 @@ public class Dobavljac {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
     @Column(name = "pib_dobavljaca")
     private Long pibDobavljaca;
 
+    @NotBlank
     @Column(name = "naziv_dobavljaca")
     private String nazivDobavljaca;
 
@@ -33,9 +36,6 @@ public class Dobavljac {
     @ManyToOne
     @JoinColumn(name = "ptt", referencedColumnName = "ptt")
     private Grad grad;
-
-  //  @OneToMany(mappedBy = "dobavljac", cascade = CascadeType.ALL)
-   // private List<Narudzbenica> narudzbenice;
 
     @OneToMany(mappedBy = "dobavljac", cascade = CascadeType.ALL)
     @JsonBackReference

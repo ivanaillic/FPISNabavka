@@ -45,7 +45,6 @@ public class StavkaNarudzbenice {
         this.materijal = materijal;
     }
 
-    // Getteri i setteri
 
     public StavkaNarudzbeniceCompositeKey getId() {
         return id;

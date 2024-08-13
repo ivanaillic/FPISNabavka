@@ -15,14 +15,14 @@ public class ZaposleniController {
     @Autowired
     private ZaposleniRepository zaposleniRepository;
 
-    @GetMapping("/zaposleni")
+    @GetMapping("/api/zaposleni")
     public List<Zaposleni> getAllZaposleni() {
         return zaposleniRepository.findAll();
     }
 
-    @GetMapping("/zaposleni/{jmbg}")
+    @GetMapping("/api/zaposleni/{jmbg}")
     public Zaposleni getZaposleniById(@PathVariable String jmbg) {
         return zaposleniRepository.findById(jmbg)
-                .orElseThrow(() -> new ResourceNotFoundException("Zaposleni with JMBG " + jmbg + " not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Zaposleni sa JMBG " + jmbg + " nije nadjen"));
     }
 }

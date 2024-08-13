@@ -34,7 +34,7 @@ public class StavkaNarudzbeniceServiceImpl implements StavkaNarudzbeniceService 
     @Override
     public StavkaNarudzbenice updateStavkaNarudzbenice(StavkaNarudzbeniceCompositeKey id, StavkaNarudzbenice stavkaNarudzbenice) {
         if (!stavkaNarudzbeniceRepository.existsById(id)) {
-            throw new ResourceNotFoundException("StavkaNarudzbenice with id " + id + " not found");
+            throw new ResourceNotFoundException("StavkaNarudzbenice sa id " + id + " nije nadjena");
         }
         stavkaNarudzbenice.setId(id);
         return stavkaNarudzbeniceRepository.save(stavkaNarudzbenice);
@@ -45,7 +45,7 @@ public class StavkaNarudzbeniceServiceImpl implements StavkaNarudzbeniceService 
         if (stavkaNarudzbeniceRepository.existsById(id)) {
             stavkaNarudzbeniceRepository.deleteById(id);
         } else {
-            throw new ResourceNotFoundException("StavkaNarudzbenice with id " + id + " not found");
+            throw new ResourceNotFoundException("StavkaNarudzbenice sa id " + id + " nije nadjena");
         }
     }
 }

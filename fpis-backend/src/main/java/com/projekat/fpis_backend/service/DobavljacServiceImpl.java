@@ -28,7 +28,7 @@ public class DobavljacServiceImpl implements DobavljacService {
         if (dobavljacRepository.existsById(dobavljac.getPibDobavljaca())) {
             return dobavljacRepository.save(dobavljac);
         }
-        throw new RuntimeException("Dobavljac with id " + dobavljac.getPibDobavljaca() + " does not exist.");
+        throw new RuntimeException("Dobavljac sa id " + dobavljac.getPibDobavljaca() + " ne postoji");
     }
 
     @Override
@@ -36,7 +36,7 @@ public class DobavljacServiceImpl implements DobavljacService {
         if (dobavljacRepository.existsById(pibDobavljaca)) {
             dobavljacRepository.deleteById(pibDobavljaca);
         } else {
-            throw new RuntimeException("Dobavljac with id " + pibDobavljaca + " does not exist.");
+            throw new RuntimeException("Dobavljac sa id " + pibDobavljaca + " ne postoji");
         }
     }
 

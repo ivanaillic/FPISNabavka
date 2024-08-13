@@ -2,7 +2,6 @@ package com.projekat.fpis_backend.service;
 
 import com.projekat.fpis_backend.exception.ResourceNotFoundException;
 import com.projekat.fpis_backend.model.Narudzbenica;
-import com.projekat.fpis_backend.model.Status;
 import com.projekat.fpis_backend.repository.NarudzbenicaRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +32,6 @@ public class NarudzbenicaServiceImpl implements NarudzbenicaService {
     public Narudzbenica createNarudzbenica(Narudzbenica narudzbenica) {
         logger.info("Početak kreiranja narudžbenice: {}", narudzbenica);
 
-        // Logovanje svake stavke narudžbenice
         narudzbenica.getStavkeNarudzbenice().forEach(stavka -> {
             logger.info("Stavka narudžbenice: {}", stavka);
             stavka.setNarudzbenica(narudzbenica);
@@ -48,7 +46,7 @@ public class NarudzbenicaServiceImpl implements NarudzbenicaService {
     @Override
     public Narudzbenica updateNarudzbenica(Long id, Narudzbenica narudzbenica) {
         if (!narudzbenicaRepository.existsById(id)) {
-            throw new ResourceNotFoundException("Narudzbenica with id " + id + " not found");
+            throw new ResourceNotFoundException("Narudzbenica sa id " + id + " ne postoji");
         }
         narudzbenica.setBrojNarudzbenice(id);
         narudzbenica.getStavkeNarudzbenice().forEach(stavka -> stavka.setNarudzbenica(narudzbenica));
@@ -60,7 +58,7 @@ public class NarudzbenicaServiceImpl implements NarudzbenicaService {
         if (narudzbenicaRepository.existsById(id)) {
             narudzbenicaRepository.deleteById(id);
         } else {
-            throw new ResourceNotFoundException("Narudzbenica with id " + id + " not found");
+            throw new ResourceNotFoundException("Narudzbenica sa id " + id + " ne postoji");
         }
     }
 }

@@ -18,6 +18,7 @@ import java.util.Optional;
 public class NarudzbenicaController {
 
     private static final Logger logger = LoggerFactory.getLogger(NarudzbenicaController.class);
+
     @Autowired
     private NarudzbenicaService narudzbenicaService;
 

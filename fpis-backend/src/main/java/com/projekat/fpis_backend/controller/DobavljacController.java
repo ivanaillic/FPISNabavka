@@ -15,23 +15,23 @@ public class DobavljacController {
     @Autowired
     private DobavljacRepository dobavljacRepository;
 
-    @PostMapping("/dobavljac")
+    @PostMapping("/api/dobavljac")
     Dobavljac newDobavljac(@RequestBody Dobavljac newDobavljac){
         return dobavljacRepository.save(newDobavljac);
     }
 
-    @GetMapping("/dobavljaci")
+    @GetMapping("/api/dobavljaci")
     List<Dobavljac> getAllDobavljaci(){
         return dobavljacRepository.findAll();
     }
 
-    @GetMapping("/dobavljac/{pib}")
+    @GetMapping("/api/dobavljac/{pib}")
     Dobavljac getDobavljacById(@PathVariable Long pib){
         return dobavljacRepository.findById(pib)
-                .orElseThrow(() -> new ResourceNotFoundException("Dobavljac with PIB " + pib + " not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Dobavljac sa PIB " + pib + " nije nadjen"));
     }
 
-    @PutMapping("/dobavljac/{pib}")
+    @PutMapping("/api/dobavljac/{pib}")
     Dobavljac updateDobavljac(@RequestBody Dobavljac newDobavljac, @PathVariable Long pib){
         return dobavljacRepository.findById(pib)
                 .map(dobavljac -> {
@@ -41,15 +41,15 @@ public class DobavljacController {
                     dobavljac.setTekuciRacun(newDobavljac.getTekuciRacun());
                     dobavljac.setGrad(newDobavljac.getGrad());
                     return dobavljacRepository.save(dobavljac);
-                }).orElseThrow(() -> new ResourceNotFoundException("Dobavljac with PIB " + pib + " not found"));
+                }).orElseThrow(() -> new ResourceNotFoundException("Dobavljac sa PIB " + pib + " nije nadjen"));
     }
 
-    @DeleteMapping("/dobavljac/{pib}")
+    @DeleteMapping("/api/dobavljac/{pib}")
     String deleteDobavljac(@PathVariable Long pib){
         if (!dobavljacRepository.existsById(pib)) {
-            throw new ResourceNotFoundException("Dobavljac with PIB " + pib + " not found");
+            throw new ResourceNotFoundException("Dobavljac sa PIB " + pib + " nije nadjen");
         }
         dobavljacRepository.deleteById(pib);
-        return "Dobavljac with PIB " + pib + " has been deleted successfully.";
+        return "Dobavljac sa PIB " + pib + " je uspesno obrisan";
     }
 }

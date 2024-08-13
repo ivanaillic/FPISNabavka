@@ -1,6 +1,5 @@
 package com.projekat.fpis_backend.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.time.LocalDate;
@@ -26,8 +25,8 @@ public class Narudzbenica {
     @Column(name = "rok_isporuke")
     private LocalDate rokIsporuke;
 
-    @Column(name = "ukupno_naruceno")
-    private Double ukupnoNaruceno;
+    @Column(name = "ukupan_iznos")
+    private Double ukupanIznos;
 
     @ManyToOne()
     @JoinColumn(name = "jmbg_zaposlenog", referencedColumnName = "jmbg")
@@ -39,10 +38,6 @@ public class Narudzbenica {
 
     @Column(name = "napomena")
     private String napomena;
-
-   // @OneToMany(mappedBy = "narudzbenica", cascade = CascadeType.ALL, orphanRemoval = true)
-   // @JsonIgnoreProperties("narudzbenica")
-   // private List<StavkaNarudzbenice> stavkeNarudzbenice = new ArrayList<>();
 
     @OneToMany(mappedBy = "narudzbenica", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
@@ -81,12 +76,12 @@ public class Narudzbenica {
         this.rokIsporuke = rokIsporuke;
     }
 
-    public Double getUkupnoNaruceno() {
-        return ukupnoNaruceno;
+    public Double getUkupanIznos() {  // Updated getter name
+        return ukupanIznos;
     }
 
-    public void setUkupnoNaruceno(Double ukupnoNaruceno) {
-        this.ukupnoNaruceno = ukupnoNaruceno;
+    public void setUkupanIznos(Double ukupanIznos) {  // Updated setter name
+        this.ukupanIznos = ukupanIznos;
     }
 
     public Zaposleni getZaposleni() {
