@@ -1,9 +1,8 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:8080';
+const API_BASE_URL = 'http://localhost:8080/api';
 
 class ApiService {
-    // Dobavljači
     getDobavljaci() {
         return axios.get(`${API_BASE_URL}/dobavljaci`);
     }
@@ -24,48 +23,42 @@ class ApiService {
         return axios.delete(`${API_BASE_URL}/dobavljac/${pib}`);
     }
 
-    // Gradovi
     getGradovi() {
         return axios.get(`${API_BASE_URL}/gradovi`);
     }
 
-    // Narudžbenice
     getNarudzbenice() {
-        return axios.get(`${API_BASE_URL}/api/narudzbenice`);
+        return axios.get(`${API_BASE_URL}/narudzbenice`);
     }
 
     getNarudzbenicaById(id) {
-        return axios.get(`${API_BASE_URL}/api/narudzbenice/${id}`);
+        return axios.get(`${API_BASE_URL}/narudzbenice/${id}`);
     }
 
     createNarudzbenica(narudzbenica) {
-        return axios.post(`${API_BASE_URL}/api/narudzbenice`, narudzbenica);
+        return axios.post(`${API_BASE_URL}/narudzbenice`, narudzbenica);
     }
 
     updateNarudzbenica(id, narudzbenica) {
-        return axios.put(`${API_BASE_URL}/api/narudzbenice/${id}`, narudzbenica);
+        return axios.put(`${API_BASE_URL}/narudzbenice/${id}`, narudzbenica);
     }
 
     deleteNarudzbenica(id) {
-        return axios.delete(`${API_BASE_URL}/api/narudzbenice/${id}`);
+        return axios.delete(`${API_BASE_URL}/narudzbenice/${id}`);
     }
 
-    // Stavke narudžbenice
-
     createStavkaNarudzbenice(stavka) {
-        return axios.post(`${API_BASE_URL}/api/stavke-narudzbenice`, stavka);
+        return axios.post(`${API_BASE_URL}/stavke-narudzbenice`, stavka);
     }
 
     updateStavkaNarudzbenice(id, stavka) {
-        return axios.put(`${API_BASE_URL}/api/stavke-narudzbenice/${id}`, stavka);
+        return axios.put(`${API_BASE_URL}/stavke-narudzbenice/${id}`, stavka);
     }
 
     deleteStavkaNarudzbenice(id) {
-        return axios.delete(`${API_BASE_URL}/api/stavke-narudzbenice/${id}`);
+        return axios.delete(`${API_BASE_URL}/stavke-narudzbenice/${id}`);
     }
 
-
-    // Zaposleni
     getZaposleni() {
         return axios.get(`${API_BASE_URL}/zaposleni`);
     }
@@ -74,7 +67,6 @@ class ApiService {
         return axios.get(`${API_BASE_URL}/zaposleni/${jmbg}`);
     }
 
-    // Materijali
     getMaterijali() {
         return axios.get(`${API_BASE_URL}/materijali`);
     }

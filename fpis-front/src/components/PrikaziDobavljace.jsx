@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ApiService from '../services/ApiService';
+import './PrikaziDobavljace.css';
 
 const PrikaziDobavljace = () => {
     const [dobavljaci, setDobavljaci] = useState([]);
@@ -52,9 +53,11 @@ const PrikaziDobavljace = () => {
 
     return (
         <div className="container">
-            <h2>Dobavljači</h2>
+            <div className="title-container">
+                <h2>Dobavljači</h2>
+            </div>
 
-            <div className="mb-3">
+            <div className="input-container">
                 <input
                     type="text"
                     className="form-control"
@@ -64,49 +67,53 @@ const PrikaziDobavljace = () => {
                 />
             </div>
 
-            <table className="table table-striped">
-                <thead>
-                    <tr>
-                        <th>PIB</th>
-                        <th>Naziv</th>
-                        <th>Telefon</th>
-                        <th>Email</th>
-                        <th>Tekući Račun</th>
-                        <th>Grad</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {filtriraniDobavljaci.map(dobavljac => (
-                        <tr
-                            key={dobavljac.pibDobavljaca}
-                            onClick={() => handleRowClick(dobavljac)}
-                            className={selektovaniDobavljac && selektovaniDobavljac.pibDobavljaca === dobavljac.pibDobavljaca ? 'table-active' : ''}
-                        >
-                            <td>{dobavljac.pibDobavljaca}</td>
-                            <td>{dobavljac.nazivDobavljaca}</td>
-                            <td>{dobavljac.telefon}</td>
-                            <td>{dobavljac.emailDobavljaca}</td>
-                            <td>{dobavljac.tekuciRacun}</td>
-                            <td>{dobavljac.grad ? dobavljac.grad.nazivGrada : 'N/A'}</td>
+            <div className="table-container">
+                <table className="table table-striped table-responsive">
+                    <thead>
+                        <tr>
+                            <th>PIB</th>
+                            <th>Naziv</th>
+                            <th>Telefon</th>
+                            <th>Email</th>
+                            <th>Tekući Račun</th>
+                            <th>Grad</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {filtriraniDobavljaci.map(dobavljac => (
+                            <tr
+                                key={dobavljac.pibDobavljaca}
+                                onClick={() => handleRowClick(dobavljac)}
+                                className={selektovaniDobavljac && selektovaniDobavljac.pibDobavljaca === dobavljac.pibDobavljaca ? 'table-active' : ''}
+                            >
+                                <td>{dobavljac.pibDobavljaca}</td>
+                                <td>{dobavljac.nazivDobavljaca}</td>
+                                <td>{dobavljac.telefon}</td>
+                                <td>{dobavljac.emailDobavljaca}</td>
+                                <td>{dobavljac.tekuciRacun}</td>
+                                <td>{dobavljac.grad ? dobavljac.grad.nazivGrada : 'N/A'}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
 
-            <button
-                className="btn btn-warning mt-3 me-2"
-                onClick={handleEdit}
-                disabled={!selektovaniDobavljac}
-            >
-                Izmeni Dobavljača
-            </button>
-            <button
-                className="btn btn-danger mt-3"
-                onClick={handleDelete}
-                disabled={!selektovaniDobavljac}
-            >
-                Obriši Dobavljača
-            </button>
+            <div className="button-group">
+                <button
+                    className="btn btn-warning me-2"
+                    onClick={handleEdit}
+                    disabled={!selektovaniDobavljac}
+                >
+                    Izmeni Dobavljača
+                </button>
+                <button
+                    className="btn btn-danger"
+                    onClick={handleDelete}
+                    disabled={!selektovaniDobavljac}
+                >
+                    Obriši Dobavljača
+                </button>
+            </div>
         </div>
     );
 };

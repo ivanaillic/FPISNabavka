@@ -88,8 +88,7 @@ const PrikaziNarudzbenice = () => {
             if (selectedNarudzbenica.statusNarudzbenice === 'KREIRANA' || selectedNarudzbenica.statusNarudzbenice === 'IZMENJENA') {
                 navigate(`/izmeni-narudzbenicu/${selectedNarudzbenicaId}`);
             } else {
-
-                setAlertMessage('Nije odgovarajuci status.');
+                setAlertMessage('Nije odgovarajući status.');
                 setAlertType('warning');
             }
         } else {
@@ -98,10 +97,9 @@ const PrikaziNarudzbenice = () => {
         }
     };
 
-
     return (
         <div className="container mt-4">
-            <h2>Prikaz Narudžbenica</h2>
+            <h2>Narudžbenice</h2>
             {alertMessage && (
                 <div className={`alert alert-${alertType} alert-dismissible fade show`} role="alert">
                     {alertMessage}
@@ -122,9 +120,10 @@ const PrikaziNarudzbenice = () => {
                     <tr>
                         <th>Broj Narudžbenice</th>
                         <th>Status</th>
-                        <th>Datum Narudžbe</th>
-                        <th>Rok Isporuke</th>
-                        <th>Ukupno Naručeno</th>
+                        <th>Dobavljač</th>
+                        <th>Ukupan Iznos</th>
+                        <th>Zaposleni</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -141,20 +140,19 @@ const PrikaziNarudzbenice = () => {
                             >
                                 <td>{narudzbenica.brojNarudzbenice}</td>
                                 <td>{narudzbenica.statusNarudzbenice}</td>
-                                <td>{narudzbenica.datumNarucivanja}</td>
-                                <td>{narudzbenica.rokIsporuke}</td>
-                                <td>{narudzbenica.ukupnoNaruceno}</td>
+                                <td>{narudzbenica.dobavljac ? narudzbenica.dobavljac.nazivDobavljaca : 'N/A'}</td>
+                                <td>{narudzbenica.ukupanIznos}</td>
+                                <td>{narudzbenica.zaposleni ? narudzbenica.zaposleni.imePrezime : 'N/A'}</td>
+
                             </tr>
                         ))}
                 </tbody>
             </table>
             <div className="d-flex justify-content-between mt-3">
                 <button className="btn btn-primary" onClick={handleViewDetails}>Prikazi Narudžbenicu</button>
-                <button className="btn btn-secondary" onClick={handleEdit}>Izmeni Narudžbenicu</button>
+                <button className="btn btn-warning me-2" onClick={handleEdit}>Izmeni Narudžbenicu</button>
                 <button className="btn btn-danger" onClick={handleDelete}>Obriši Narudžbenicu</button>
             </div>
-
-            {/* Modal za potvrdu brisanja */}
             {showModal && (
                 <div className="modal fade show d-block" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog" role="document">
@@ -168,7 +166,6 @@ const PrikaziNarudzbenice = () => {
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary" onClick={cancelDelete}>Odustani</button>
-
                                 <button type="button" className="btn btn-primary" onClick={confirmDelete}>Potvrdi</button>
                             </div>
                         </div>

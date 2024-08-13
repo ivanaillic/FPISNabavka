@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import ApiService from '../services/ApiService';
+import { useNavigate } from 'react-router-dom';
 
 const DodajDobavljaca = () => {
     const [dobavljac, setDobavljac] = useState({
+        pibDobavljaca: '',
         nazivDobavljaca: '',
         telefon: '',
         emailDobavljaca: '',
@@ -11,11 +13,12 @@ const DodajDobavljaca = () => {
     });
 
     const [gradovi, setGradovi] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         ApiService.getGradovi()
             .then(response => setGradovi(response.data))
-            .catch(error => console.error('Error fetching cities:', error));
+            .catch(error => console.error('Greska pri dohvatanju gradova:', error));
     }, []);
 
     const handleChange = (e) => {
@@ -38,19 +41,39 @@ const DodajDobavljaca = () => {
         e.preventDefault();
         ApiService.createDobavljac(dobavljac)
             .then(response => {
-                console.log('Dobavljac successfully created:', response.data);
+                console.log('Dobavljac uspesno kreiran:', response.data);
+                navigate('/dobavljaci');
             })
             .catch(error => {
-                console.error('There was an error creating the supplier:', error);
+                console.error('Greska pri kreiranju dobavljaca:', error);
             });
     };
 
+    const handleCancel = () => {
+        navigate('/dobavljaci');
+    };
+
     return (
-        <div className="container mt-5">
-            <h2>Dodaj Dobavljača</h2>
-            <form onSubmit={handleSubmit}>
+        <div className="container mt-5 mb-5 mx-auto" style={{ width: '100%', maxWidth: '600px', backgroundColor: '#ffffff', padding: '30px', borderRadius: '10px', boxShadow: '0px 0px 20px rgba(0,0,0,0.15)' }}>
+            <h2 className="text-center mb-4" style={{ fontSize: '2.5rem', color: '#343a40' }}>Dodaj Dobavljača</h2>
+            <form onSubmit={handleSubmit} style={{ width: '100%' }}>
                 <div className="mb-3">
-                    <label htmlFor="nazivDobavljaca" className="form-label">Naziv dobavljača</label>
+                    <label htmlFor="pibDobavljaca" style={{ color: '#495057', textAlign: 'left', display: 'block' }}>PIB dobavljača:</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="pibDobavljaca"
+                        name="pibDobavljaca"
+                        value={dobavljac.pibDobavljaca}
+                        onChange={handleChange}
+                        placeholder="Unesite PIB dobavljača"
+                        required
+                        style={{ borderRadius: '5px', borderColor: '#ced4da' }}
+                    />
+                </div>
+
+                <div className="mb-3">
+                    <label htmlFor="nazivDobavljaca" style={{ color: '#495057', textAlign: 'left', display: 'block' }}>Naziv dobavljača:</label>
                     <input
                         type="text"
                         className="form-control"
@@ -58,12 +81,14 @@ const DodajDobavljaca = () => {
                         name="nazivDobavljaca"
                         value={dobavljac.nazivDobavljaca}
                         onChange={handleChange}
+                        placeholder="Unesite naziv dobavljača"
                         required
+                        style={{ borderRadius: '5px', borderColor: '#ced4da' }}
                     />
                 </div>
 
                 <div className="mb-3">
-                    <label htmlFor="telefon" className="form-label">Telefon</label>
+                    <label htmlFor="telefon" style={{ color: '#495057', textAlign: 'left', display: 'block' }}>Telefon:</label>
                     <input
                         type="text"
                         className="form-control"
@@ -71,11 +96,13 @@ const DodajDobavljaca = () => {
                         name="telefon"
                         value={dobavljac.telefon}
                         onChange={handleChange}
+                        placeholder="Unesite broj telefona"
+                        style={{ borderRadius: '5px', borderColor: '#ced4da' }}
                     />
                 </div>
 
                 <div className="mb-3">
-                    <label htmlFor="emailDobavljaca" className="form-label">Email dobavljača</label>
+                    <label htmlFor="emailDobavljaca" style={{ color: '#495057', textAlign: 'left', display: 'block' }}>Email dobavljača:</label>
                     <input
                         type="email"
                         className="form-control"
@@ -83,11 +110,13 @@ const DodajDobavljaca = () => {
                         name="emailDobavljaca"
                         value={dobavljac.emailDobavljaca}
                         onChange={handleChange}
+                        placeholder="Unesite email dobavljača"
+                        style={{ borderRadius: '5px', borderColor: '#ced4da' }}
                     />
                 </div>
 
                 <div className="mb-3">
-                    <label htmlFor="tekuciRacun" className="form-label">Tekući račun</label>
+                    <label htmlFor="tekuciRacun" style={{ color: '#495057', textAlign: 'left', display: 'block' }}>Tekući račun:</label>
                     <input
                         type="text"
                         className="form-control"
@@ -95,18 +124,21 @@ const DodajDobavljaca = () => {
                         name="tekuciRacun"
                         value={dobavljac.tekuciRacun}
                         onChange={handleChange}
+                        placeholder="Unesite broj tekućeg računa"
                         required
+                        style={{ borderRadius: '5px', borderColor: '#ced4da' }}
                     />
                 </div>
 
                 <div className="mb-3">
-                    <label htmlFor="grad" className="form-label">Grad</label>
+                    <label htmlFor="grad" style={{ color: '#495057', textAlign: 'left', display: 'block' }}>Grad</label>
                     <select
                         className="form-select"
                         id="grad"
                         value={dobavljac.grad.ptt}
                         onChange={handleGradChange}
                         required
+                        style={{ borderRadius: '5px', borderColor: '#ced4da' }}
                     >
                         <option value="">Izaberite grad</option>
                         {gradovi.map((grad) => (
@@ -117,9 +149,14 @@ const DodajDobavljaca = () => {
                     </select>
                 </div>
 
-                <button type="submit" className="btn btn-primary">
-                    Dodaj Dobavljača
-                </button>
+                <div className="d-flex justify-content-between">
+                    <button type="submit" className="btn btn-success" style={{ backgroundColor: '#28a745', borderColor: '#28a745', borderRadius: '5px', fontSize: '1rem', width: '48%' }}>
+                        Potvrdi unos
+                    </button>
+                    <button type="button" className="btn btn-danger" style={{ backgroundColor: '#dc3545', borderColor: '#dc3545', borderRadius: '5px', fontSize: '1rem', width: '48%' }} onClick={handleCancel}>
+                        Otkaži
+                    </button>
+                </div>
             </form>
         </div>
     );
