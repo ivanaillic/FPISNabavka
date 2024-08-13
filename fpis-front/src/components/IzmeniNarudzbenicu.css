@@ -92,3 +92,7 @@ button.btn-warning,
 button.btn-danger {
     margin-right: 10px;
 }
+
+.alert {
+    margin-top: 1rem;
+}

@@ -42,7 +42,7 @@ const DodajDobavljaca = () => {
         ApiService.createDobavljac(dobavljac)
             .then(response => {
                 console.log('Dobavljac uspesno kreiran:', response.data);
-                navigate('/dobavljaci');
+                navigate('/prikazi-dobavljace');
             })
             .catch(error => {
                 console.error('Greska pri kreiranju dobavljaca:', error);
@@ -50,7 +50,7 @@ const DodajDobavljaca = () => {
     };
 
     const handleCancel = () => {
-        navigate('/dobavljaci');
+        navigate('/prikazi-dobavljace');
     };
 
     return (

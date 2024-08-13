@@ -17,6 +17,7 @@ const IzmeniNarudzbenicu = () => {
     const [noviOpis, setNoviOpis] = useState('');
     const [napomena, setNapomena] = useState('');
     const [editingIndex, setEditingIndex] = useState(null);
+    const [alertMessage, setAlertMessage] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -53,7 +54,7 @@ const IzmeniNarudzbenicu = () => {
             const materijal = materijali.find(m => m.sifraMaterijala === stavka.materijal.sifraMaterijala);
             const cena = materijal ? materijal.cena : 0;
             return total + (stavka.kolicina * cena);
-        }, 0).toFixed(2);
+        }, 0).toFixed(1);
     };
 
     const handleInputChange = (event) => {
@@ -159,6 +160,16 @@ const IzmeniNarudzbenicu = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        const datumNarucivanja = new Date(narudzbenica.datumNarucivanja);
+        const rokIsporuke = new Date(narudzbenica.rokIsporuke);
+
+        if (datumNarucivanja > rokIsporuke) {
+            setAlertMessage('Datum poručivanja ne može biti posle roka isporuke.');
+            return;
+        }
+
+        setAlertMessage('');
 
         const ukupnoIznos = parseFloat(calculateUkupanIznos());
         const updatedNarudzbenica = {
@@ -413,7 +424,11 @@ const IzmeniNarudzbenicu = () => {
                             rows="3"
                         />
                     </div>
-
+                    {alertMessage && (
+                        <div className="alert alert-danger" role="alert">
+                            {alertMessage}
+                        </div>
+                    )}
                     <div className="mt-4">
                         <button type="submit" className="btn btn-success">Sačuvaj narudžbenicu</button>
                         <button type="button" className="btn btn-danger" onClick={() => navigate('/prikazi-narudzbenice')}>

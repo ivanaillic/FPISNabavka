@@ -33,7 +33,7 @@ const PrikaziNarudzbenicuDetalji = () => {
                     <ul className="list-group mb-4">
                         <li className="list-group-item"><strong>Broj Narudžbenice:</strong> {narudzbenica.brojNarudzbenice}</li>
                         <li className="list-group-item"><strong>Status:</strong> {narudzbenica.statusNarudzbenice}</li>
-                        <li className="list-group-item"><strong>Datum Narudžbe:</strong> {narudzbenica.datumNarucivanja}</li>
+                        <li className="list-group-item"><strong>Datum Naručivanja:</strong> {narudzbenica.datumNarucivanja}</li>
                         <li className="list-group-item"><strong>Rok Isporuke:</strong> {narudzbenica.rokIsporuke}</li>
                         <li className="list-group-item"><strong>Ukupan Iznos:</strong> {narudzbenica.ukupanIznos}</li>
                         <li className="list-group-item"><strong>Napomena:</strong> {narudzbenica.napomena}</li>
@@ -65,7 +65,7 @@ const PrikaziNarudzbenicuDetalji = () => {
                     </table>
                 </div>
                 <div className="card-footer">
-                    <button type="button" className="btn btn-secondary" onClick={handleClose}>Zatvori</button>
+                    <button type="button" className="btn btn-add-stavka" onClick={handleClose}>Zatvori</button>
                 </div>
             </div>
         </div>

@@ -132,6 +132,14 @@ const DodajNarudzbenicu = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        const datumNarucivanja = new Date(narudzbenica.datumNarucivanja);
+        const rokIsporuke = new Date(narudzbenica.rokIsporuke);
+
+        if (datumNarucivanja > rokIsporuke) {
+            setError('Datum poručivanja ne može biti posle roka isporuke.');
+            return;
+        }
+
         if (narudzbenica.stavkeNarudzbenice.length === 0) {
             setError('Morate dodati bar jednu stavku u tabelu pre nego što kreirate narudžbenicu');
             return;
@@ -238,7 +246,7 @@ const DodajNarudzbenicu = () => {
                                 id="novaKolicina"
                                 value={novaKolicina}
                                 onChange={(e) => setNovaKolicina(e.target.value)}
-                                step="0.1"
+                                step="1"
                                 placeholder="Unesite količinu za narudžbenicu"
                             />
                         </div>
