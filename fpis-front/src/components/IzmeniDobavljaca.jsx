@@ -60,7 +60,7 @@ const IzmeniDobavljaca = () => {
         e.preventDefault();
         ApiService.updateDobavljac(pib, dobavljac)
             .then(() => {
-                navigate('/dobavljaci');
+                navigate('/prikazi-dobavljace');
             })
             .catch(error => {
                 console.error('Greska pri azuriranju dobavljaca', error);

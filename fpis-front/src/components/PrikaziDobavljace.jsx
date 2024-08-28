@@ -15,7 +15,7 @@ const PrikaziDobavljace = () => {
                 setDobavljaci(response.data);
             })
             .catch(error => {
-                console.error('There was an error fetching the dobavljaci!', error);
+                console.error('Greska prilikom ucitavanja dobavljaca!', error);
             });
     }, []);
 
@@ -35,7 +35,7 @@ const PrikaziDobavljace = () => {
                     setSelektovaniDobavljac(null);
                 })
                 .catch(error => {
-                    console.error('There was an error deleting the supplier!', error);
+                    console.error('Greska prilikom brisanja dobavljaca!', error);
                 });
         }
     };
